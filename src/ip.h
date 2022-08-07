@@ -4,7 +4,7 @@
 #include <string>
 
 struct Ip final {
-	static const int SIZE = 4;
+	static const int SIZE = 4;	// 전역변수 취급이라 sturct Ip에 안들어감.
 
 	// constructor
 	Ip() {}
@@ -33,5 +33,5 @@ struct Ip final {
 	}
 
 protected:
-	uint32_t ip_;
+	uint32_t ip_;	// sizeof(struct Ip) = sizeof(uint32_t); -> 4bytes
 };

@@ -8,6 +8,7 @@
 // Mac
 // ----------------------------------------------------------------------------
 struct Mac final {
+	// scope 안에서만 사용 가능한 symbol.
 	static constexpr int SIZE = 6;
 
 	// constructor
@@ -53,7 +54,7 @@ struct Mac final {
 	static Mac& broadcastMac();
 
 protected:
-	uint8_t mac_[SIZE];
+	uint8_t mac_[SIZE];	// uint8_t mac_[6];
 };
 
 namespace std {
